@@ -24,15 +24,19 @@ DSH 内置的审批面板只有两个选择——「允许一次」和「拒绝�
 
 ### 方式一：作为 DSH 插件包（推荐）
 
-```powershell
-dsh plugin --profile <profile> add https://github.com/Miaoyeah/dsh-approval-session-allow
+在 DSH Web 界面的**插件**页粘贴本仓库地址安装：
+
+```
+https://github.com/Miaoyeah/dsh-approval-session-allow
 ```
 
-包内的 `cordis.patch.yml` 会禁用内置审批面板并插入本插件的 Loader 条目，安装即生效。
+安装会把它写进 profile 的 `dsh.profile.bundles` 并默认启用，包内的 `cordis.patch.yml` 随即生效（禁用内置审批面板 + 插入本插件条目）。让 agent 调用 `plugin_manager` 的 `install_bundle` 效果相同。
+
+> 只跑 `dsh plugin add <git-url>` 是不够的：该命令把参数原样转发给 `pnpm add`，只安装依赖、**不会选中组合包**。这种情况下还要手动把 `dsh-approval-session-allow` 加进 profile `package.json` 的 `dsh.profile.bundles` 列表，否则插件不会被加载。
 
 ### 方式二：手动接进 profile
 
-在本机把仓库目录作为 `link:` 依赖登记，并在 profile 的 `cordis.patch.yml` 末尾追加：
+把仓库目录作为 `link:` 依赖登记，并在 profile 的 `cordis.patch.yml` 末尾追加：
 
 ```yaml
 - id: ui-approval
