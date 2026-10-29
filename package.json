@@ -1,0 +1,54 @@
+{
+  "name": "dsh-approval-session-allow",
+  "version": "0.1.0",
+  "description": "DSH 审批面板增加「本对话均允许」：按工具记住本会话的授权决定，后续同类审批自动放行，并可随时撤销。",
+  "license": "MIT",
+  "author": "Miao Junhao",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/client.js",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node test/contract.mjs"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "approval",
+    "permission",
+    "审批",
+    "授权"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Miaoyeah/dsh-approval-session-allow.git"
+  },
+  "homepage": "https://github.com/Miaoyeah/dsh-approval-session-allow#readme",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-ui-session"
+      ],
+      "platform": "web"
+    }
+  }
+}

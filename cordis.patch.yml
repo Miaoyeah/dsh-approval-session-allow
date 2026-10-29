@@ -1,0 +1,15 @@
+# dsh-approval-session-allow bundle patch.
+#
+# Installing this package as a DSH bundle applies these two rows:
+#   1. disable the bundled approval panel — this plugin owns the composer panel;
+#   2. insert this package's Loader entry, which publishes the browser half
+#      declared by `dsh.client` in package.json.
+#
+# Do not also add these rows to a profile's own cordis.patch.yml: the same entry
+# inserted twice is a duplicate Loader id.
+- id: ui-approval
+  name: '@deepseek-ai/dsh-client-ui-approval'
+  disabled: true
+- insert:
+    - id: approval-session-allow
+      name: 'dsh-approval-session-allow'
